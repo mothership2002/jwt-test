@@ -14,13 +14,18 @@ function App() {
       return resp.json();
     }).then( (resJson) => {
       setMessage(resJson.message);
-      setToken(resJson.token);
+      const temp = resJson.token;
+      setToken(temp);
+
       const payload = JSON.parse(atob(resJson.token.split('.')[1]));
       console.log(payload);
       if ( payload.exp < Math.floor( new Date().getTime() / 1000 ) ) {
+        localStorage.removeItem('user-login-session');
         console.log('유효시간 만료');
+        return;
       }
       else {
+        localStorage.setItem('user-login-session', temp);
         console.log('허용');
       }
     });
