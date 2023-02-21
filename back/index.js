@@ -49,11 +49,12 @@ app.get('/test/session/', (req, resp, next) => {
     } catch (TokenExpiredError) {
         console.log('토큰 만료');
         object.message = "token expired"
+        return resp.status(401).json(object);
     }
 
     console.log('now = ' + Math.floor( new Date().getTime() / 1000 ) );
-
-    resp.json(object)
+    object.message = 'ok';
+    resp.status(200).json(object);
 });
 
 
