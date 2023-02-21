@@ -1,3 +1,4 @@
+const valditor = require('../back/module').valditor;
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
@@ -11,13 +12,13 @@ const port = 8080;
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (res, resp, next) => {
+app.get('/', (req, resp, next) => {
 
     const token = jwt.sign(
                     { 
                         session: 'haha',
                         // exp : Math.floor( ( ( new Date().getTime() - 3610000 ) / 1000 ) + 60 * 60 ), 
-                        exp : Math.floor( (  new Date().getTime() / 1000 ) + 60 * 60 ), 
+                        exp : Math.floor( (  new Date().getTime() / 1000 ) + 60 ), 
                     }, secretKey);
     const object = {};
     const message = 'hello world!!';
@@ -26,6 +27,33 @@ app.get('/', (res, resp, next) => {
     object.token = token;
 
     resp.json(object);
+});
+
+app.get('/test/session/', (req, resp, next) => {
+
+    const sessionToken = (req.headers.authorization).split(' ');
+
+    const type = sessionToken[0];
+    const token = sessionToken[1];
+
+    console.log('type = ' + type);
+    console.log('token = ' + token);
+
+    let temp;
+    const object = {};
+
+    try {
+        temp = jwt.verify(sessionToken[1], secretKey); 
+        console.log(temp);
+        valditor(temp);
+    } catch (TokenExpiredError) {
+        console.log('토큰 만료');
+        object.message = "token expired"
+    }
+
+    console.log('now = ' + Math.floor( new Date().getTime() / 1000 ) );
+
+    resp.json(object)
 });
 
 

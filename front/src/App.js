@@ -30,11 +30,38 @@ function App() {
     });
   },[]);
 
+  const tempFunction = () => {
+    const sessionToken = localStorage.getItem('user-login-session');
+    console.log(sessionToken);
+
+    const url = `http://localhost:8080/test/session/`
+
+    const options = {
+      method : 'get',
+      mode : 'cors',
+      cache : 'no-cache',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : "Bearer " + sessionToken
+      }
+
+    }
+
+    fetch(url, options).then((resp) => {
+      return resp.json();
+    }).then( (resJson) => {
+      console.log(resJson.message);
+    })
+
+  }
+
   return (
     <div className="App">
       <div>{message}</div>
-
       <div style={{display:'none'}}>{token}</div>
+      <button onClick={() => {
+        tempFunction();
+      }}>button</button>
     </div>
   );
 }
