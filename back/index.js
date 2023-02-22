@@ -47,8 +47,8 @@ app.get('/test/session/', (req, resp, next) => {
         console.log(temp);
         valditor(temp);
     } catch (TokenExpiredError) {
-        console.log('토큰 만료');
-        object.message = "token expired"
+        
+        
         return resp.status(401).json(object);
     }
 

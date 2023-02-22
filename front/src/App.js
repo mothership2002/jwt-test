@@ -33,16 +33,19 @@ function App() {
   const tempFunction = () => {
     const sessionToken = localStorage.getItem('user-login-session');
     console.log(sessionToken);
+    const temp = sessionToken;
 
     const url = `http://localhost:8080/test/session/`
+    
 
+    // bearer (jwt type) 이건 뭘까
     const options = {
       method : 'get',
       mode : 'cors',
       cache : 'no-cache',
       headers: {
         'Content-Type' : 'application/json',
-        'Authorization' : "Bearer " + sessionToken
+        'Authorization' : "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uIjoiYXNkZiIsImV4cCI6MTY3Njk2NDg3MCwiaWF0IjoxNjc2OTY0ODEwfQ.CA1jWMdDe_H9yctLPgFpwzVP45a6pgmgUQnfC3oFLcE"
       }
 
     }
