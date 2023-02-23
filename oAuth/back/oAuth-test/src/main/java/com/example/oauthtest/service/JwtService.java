@@ -1,6 +1,5 @@
 package com.example.oauthtest.service;
 
-import com.example.oauthtest.dto.Member;
 import com.example.oauthtest.repository.SampleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,7 @@ public class JwtService implements SampleService{
 
     private final SampleRepository JwtRepository;
 
-    public String login(Member member) {
+    public String login() {
         return null;
     }
 }

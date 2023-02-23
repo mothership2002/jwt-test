@@ -1,6 +1,5 @@
 package com.example.oauthtest.repository;
 
-import com.example.oauthtest.dto.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 public class JwtRepository implements SampleRepository {
 
-    public String login(Member member) {
+    public String login() {
         return null;
     }
 }
